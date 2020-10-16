@@ -1,2 +1,2 @@
 # kotless-test
-`gradle deploy`
+`./gradlew deploy`
