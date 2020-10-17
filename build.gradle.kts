@@ -15,21 +15,20 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("io.kotless", "kotless-lang", "0.1.7-beta-4")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
 }
 tasks.withType<KotlinCompile>() {
     kotlinOptions.jvmTarget = "1.8"
 }
 kotless {
     config {
-        //bucket that kotless will use to store its artifacts
-        bucket = "www.waperon.org"
+        bucket = "kotless.waperon.org"
         terraform {
-            profile = "pj"
+            profile = "kotless"
             region = "eu-north-1"
         }
     }
     webapp {
-        //route53 alias for deployed application, must be in us-east-1?
-        route53 = Route53("_e491cf4eb0d63b4d22903af02782d761", "waperon.org")
+        route53 = Route53("www", "waperon.org")
     }
 }
