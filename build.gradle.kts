@@ -23,19 +23,12 @@ kotless {
     config {
         //bucket that kotless will use to store its artifacts
         bucket = "www.waperon.org"
-
         terraform {
             profile = "pj"
             region = "eu-north-1"
         }
     }
-
     webapp {
-//        lambda {
-//            kotless {
-//                packages = setOf("me.pj")
-//            }
-//        }
         //route53 alias for deployed application, must be in us-east-1?
         route53 = Route53("_e491cf4eb0d63b4d22903af02782d761", "waperon.org")
     }
