@@ -3,6 +3,7 @@ package me.pj
 import io.kotless.MimeType
 import io.kotless.dsl.lang.http.Get
 import io.kotless.dsl.lang.http.StaticGet
+import io.kotless.dsl.lang.http.href
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import java.io.File
@@ -12,17 +13,23 @@ import java.util.TimeZone
 @StaticGet("/fjell.jpg", MimeType.JPEG)
 val fjell = File("fjell.jpg")
 
-@StaticGet("/favicon.ico", MimeType.PNG)
-val favicon = File("favicon.ico")
+@StaticGet("/favicon.png", MimeType.PNG)
+val favicon = File("favicon.png")
+
+@StaticGet("/kotless-test.css", MimeType.CSS)
+val css = File("kotless-test.css")
 
 @Get("/")
 fun root(): String {
     return createHTML().html {
         head {
             link {
-                rel = "shortcut icon"
-                type = "image/png"
-                href = "/favicon.ico"
+                href = ::favicon.href
+                rel = "icon"
+            }
+            link {
+                href = ::css.href
+                rel = "stylesheet"
             }
         }
         body {
