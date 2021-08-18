@@ -4,6 +4,10 @@ import io.kotless.MimeType
 import io.kotless.dsl.lang.http.Get
 import io.kotless.dsl.lang.http.StaticGet
 import io.kotless.dsl.lang.http.href
+import io.ktor.client.*
+import io.ktor.client.engine.apache.*
+import io.ktor.client.request.*
+import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
 import kotlinx.html.stream.createHTML
 import java.io.File
@@ -41,6 +45,10 @@ fun root(): String {
                     a("https://github.com/JetBrains/kotless") { +"Kotless" }
                 }
                 p {
+                    +"Contact: "
+                    a("mailto:w4peron@gmail.com?subject=Foo") { +"w4peron@gmail.com" }
+                }
+                p {
                     img(src = "/fjell.jpg")
                 }
             }
@@ -50,3 +58,14 @@ fun root(): String {
 
 @Get("/tz")
 fun tz() = "${TimeZone.getDefault()}"
+
+@Get("/podcast", MimeType.XML)
+fun podcast(): String {
+    val client = HttpClient(Apache)
+    lateinit var content: String
+    runBlocking {
+        content = client.get("https://cP6VZ0F4:SUQklD2U@private.transistor.fm/it-simpelthen")
+    }
+    client.close()
+    return content
+}
