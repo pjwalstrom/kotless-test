@@ -8,7 +8,7 @@ This project is a sandbox for testing [Kotless](https://github.com/JetBrains/kot
 
 # Getting Started
 ## Prerequisites
-- Java 8 or newer
+- Java 17
 
 ## Installation
 1. Clone this repo
@@ -23,7 +23,7 @@ This project is a sandbox for testing [Kotless](https://github.com/JetBrains/kot
 - [x] Deploy to AWS
 - [x] Deploy to Route 53
 - [x] Use HTML DSL
-- [ ] Use static resources
+- [x] Use static resources
 - [ ] Replace Kotless DSL with Ktor
 - [ ] Make external call to [Oslo Bysykkel](https://oslobysykkel.no/apne-data/sanntid)
 - [ ] Use a suspend function

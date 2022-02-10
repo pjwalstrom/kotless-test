@@ -5,7 +5,7 @@ import io.kotless.dsl.lang.http.Get
 import io.kotless.dsl.lang.http.StaticGet
 import io.kotless.dsl.lang.http.href
 import io.ktor.client.*
-import io.ktor.client.engine.apache.*
+import io.ktor.client.engine.cio.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
 import kotlinx.html.*
@@ -46,7 +46,7 @@ fun root(): String {
                 }
                 p {
                     +"Contact: "
-                    a("mailto:w4peron@gmail.com?subject=Foo") { +"w4peron@gmail.com" }
+                    a("mailto:w4peron@gmail.com?subject=FooBar") { +"w4peron@gmail.com" }
                 }
                 p {
                     img(src = "/fjell.jpg")
@@ -61,7 +61,7 @@ fun tz() = "${TimeZone.getDefault()}"
 
 @Get("/podcast", MimeType.XML)
 fun podcast(): String {
-    val client = HttpClient(Apache)
+    val client = HttpClient(CIO)
     lateinit var content: String
     runBlocking {
         content = client.get("https://cP6VZ0F4:SUQklD2U@private.transistor.fm/it-simpelthen")

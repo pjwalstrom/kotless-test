@@ -1,36 +1,59 @@
-import io.kotless.plugin.gradle.dsl.Webapp.Route53
 import io.kotless.plugin.gradle.dsl.kotless
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    kotlin("jvm") version "1.4.21" apply true
-    id("io.kotless") version "0.1.7-beta-5" apply true
+    kotlin("jvm") version "1.6.10" apply true
+    id("io.kotless") version "0.2.0" apply true
+    id("com.github.ben-manes.versions") version "0.42.0"
 }
 group = "me.pj"
-version = "1.0-SNAPSHOT"
+version = "1.1-SNAPSHOT"
 
 repositories {
-    jcenter()
+    mavenCentral()
+    maven(url = uri("https://packages.jetbrains.team/maven/p/ktls/maven"))
 }
 dependencies {
-    implementation(kotlin("stdlib-jdk8"))
-    implementation("io.kotless", "kotless-lang", "0.1.7-beta-5")
-    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.2")
-    implementation("io.ktor:ktor-client-core:1.4.3")
-    implementation("io.ktor:ktor-client-apache:1.4.3")
+    //implementation(platform("org.jetbrains.kotlin:kotlin-bom"))
+    //implementation(kotlin("stdlib"))
+    implementation("io.kotless", "kotless-lang", "0.2.0")
+    implementation("io.kotless", "kotless-lang-aws", "0.2.0")
+    implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
+    implementation("io.ktor:ktor-client-core:1.6.7")
+    implementation("io.ktor:ktor-client-cio:1.6.7")
 }
-tasks.withType<KotlinCompile>() {
-    kotlinOptions.jvmTarget = "1.8"
+
+// https://github.com/ben-manes/gradle-versions-plugin
+fun isNonStable(version: String): Boolean {
+    val stableKeyword = listOf("RELEASE", "FINAL", "GA").any { version.toUpperCase().contains(it) }
+    val regex = "^[0-9,.v-]+(-r)?$".toRegex()
+    val isStable = stableKeyword || regex.matches(version)
+    return isStable.not()
 }
+
+tasks {
+    compileKotlin {
+        kotlinOptions.jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+    // https://github.com/ben-manes/gradle-versions-plugin
+    dependencyUpdates {
+        rejectVersionIf {
+            isNonStable(candidate.version)
+        }
+    }
+}
+
 kotless {
     config {
-        bucket = "kotless.waperon.org"
-        terraform {
+        aws {
+            storage {
+                bucket = "kotless.waperon.org"
+            }
             profile = "kotless"
             region = "eu-north-1"
         }
     }
+
     webapp {
-        route53 = Route53("www", "waperon.org")
+        dns("www", "waperon.org")
     }
 }
