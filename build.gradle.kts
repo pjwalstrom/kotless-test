@@ -19,7 +19,7 @@ dependencies {
     implementation("io.kotless", "kotless-lang-aws", "0.2.0")
     implementation("org.jetbrains.kotlinx:kotlinx-html-jvm:0.7.3")
     implementation("io.ktor:ktor-client-core:1.6.7")
-    implementation("io.ktor:ktor-client-cio:1.6.7")
+    implementation("io.ktor:ktor-client-apache:1.6.7")
 }
 
 // https://github.com/ben-manes/gradle-versions-plugin
