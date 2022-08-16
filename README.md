@@ -18,7 +18,7 @@ Current status is "on hold", as the future of Kotless is uncertain.
 1. Run locally, no AWS-account needed. Site then available at http://0.0.0.0:8080/   
 `./gradlew local`
 
-1. Create an AWS-account and an S3-bucket, update `build.gradle.kts`. Then deploy to AWS   
+1. Create an AWS-account and an S3-bucket (put credentials in `~/.aws`), update `build.gradle.kts`. Then deploy to AWS   
 `./gradlew deploy`
 
 # Roadmap
