@@ -6,9 +6,3 @@ updates:
       interval: daily
     assignees:
       - "@pjwalstrom"
-  - package-ecosystem: github-actions
-    directory: "/"
-    schedule:
-      interval: daily
-    assignees:
-      - "@pjwalstrom"
