@@ -1,5 +1,6 @@
 # kotless-test
 This project is a sandbox for testing [Kotless](https://github.com/JetBrains/kotless), running on [AWS](https://aws.amazon.com/).
+Current status is "on hold", as the future of Kotless is uncertain.
 
 ## Built With
 - [Kotlin](https://kotlinlang.org/)
@@ -9,6 +10,7 @@ This project is a sandbox for testing [Kotless](https://github.com/JetBrains/kot
 # Getting Started
 ## Prerequisites
 - Java 17
+- Kotlin 1.6.10 (no newer version is supported with kotless 0.20.0)
 
 ## Installation
 1. Clone this repo
