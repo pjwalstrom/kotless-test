@@ -5,6 +5,7 @@ import io.kotless.dsl.lang.http.Get
 import io.kotless.dsl.lang.http.StaticGet
 import io.kotless.dsl.lang.http.href
 import io.ktor.client.*
+import io.ktor.client.call.*
 import io.ktor.client.engine.apache.*
 import io.ktor.client.request.*
 import kotlinx.coroutines.runBlocking
@@ -37,7 +38,7 @@ fun root(): String {
             }
         }
         body {
-            h1 { +"Hello World" }
+            h1 { +"Hello World, again" }
             div {
                 +"Local datetime: ${LocalDateTime.now()} in TimeZone ${TimeZone.getDefault().id}"
                 p {
@@ -64,7 +65,7 @@ fun podcast(): String {
     val client = HttpClient(Apache)
     lateinit var content: String
     runBlocking {
-        content = client.get("https://cP6VZ0F4:SUQklD2U@private.transistor.fm/it-simpelthen")
+        content = client.get("https://cP6VZ0F4:SUQklD2U@private.transistor.fm/it-simpelthen").body()
     }
     client.close()
     return content
