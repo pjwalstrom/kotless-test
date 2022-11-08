@@ -1,7 +1,7 @@
 import io.kotless.plugin.gradle.dsl.kotless
 
 plugins {
-    kotlin("jvm") version "1.6.10" apply true
+    kotlin("jvm") version "1.7.21" apply true
     id("io.kotless") version "0.2.0" apply true
     id("com.github.ben-manes.versions") version "0.42.0"
 }
